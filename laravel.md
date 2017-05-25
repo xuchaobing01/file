@@ -229,5 +229,13 @@
 
 ## 14.3 多对多 ##
 
+# 15 live template #
+
+	> <!--- $VALUE$ Field --->
+	> <div class="form-group">
+    > {!! Form::label('$NAME$', '$VALUE$:') !!}
+    > {!! Form::text('$NAME$', null, ['class' => 'form-control']) !!}
+	> </div>
+
 
 
