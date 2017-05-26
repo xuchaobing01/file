@@ -1,8 +1,10 @@
 https://jellybool.com/
 
-´úÂë¹ÜÀí£º
+ä»£ç ç®¡ç†ï¼š
 https://github.com/
 https://coding.net/
 
-ÎÄµµ¹ÜÀí£º
+æ–‡æ¡£ç®¡ç†ï¼š
 https://worktile.com/
+
+https://segmentfault.com
