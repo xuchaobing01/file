@@ -244,7 +244,7 @@
 	"require": {
         "dingo/api": "1.0.*@dev",
         "tymon/jwt-auth": "0.5.*"
-    },
+    }, 
 
 	conposer update
 
