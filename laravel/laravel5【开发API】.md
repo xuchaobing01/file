@@ -248,3 +248,12 @@
 
 	conposer update
 
+# 9. `dingo api`的使用 #
+
+## 9.1 字段映射 ##
+
+## 9.2 回复json ##
+
+# 10. `jwt-auth` 的使用 #
+
+# 11. Auth 2.0 集成 #
