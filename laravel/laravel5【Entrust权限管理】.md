@@ -94,4 +94,93 @@
 
 # 3. 路由与列出所有的角色和相应的权限 #
 
+>routes.php
+>
+	Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
+	    Route::get('/','IndexController@index');
+	    Route::get('/index','IndexController@index');
+	    Route::resource('roles','RoleController');
+	    Route::resource('permissions','PermissionController');
+	    Route::resource('users','UserController');
+	});
+
+> RoleController.php
+
+	public function index(){
+        $roles=Role::with('perms')->get();
+        $perms=Permission::get();
+        return view('admin.roles.index',compact('roles','perms'));
+    }
+
+# 4. 创建角色和创建权限 #
+
+	 <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title">新建角色</h1>
+                    <!--- Form --->
+                    {!! Form::open(['url'=>'admin/roles']) !!}
+                        @include('admin.roles.form')
+
+                        <div class="checkbox">
+                            @foreach($perms as $perm)
+                                <label>
+                                    {!! Form::checkbox('perm[]',$perm->id,false) !!}
+                                    {{ $perm->display_name or $perm->name }}
+                                </label>
+                            @endforeach
+                        </div>
+
+                        <!--- 新建角色 Field --->
+                        <div class="form-group">
+                        	{!! Form::submit('新建角色',['class' => 'btn btn-success form-control']) !!}
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title">新建权限</h1>
+                    <!--- Form --->
+                {!! Form::open(['url'=>'admin/permissions']) !!}
+                @include('admin.roles.form')
+                <!--- 新建角色 Field --->
+                    <div class="form-group">
+                        {!! Form::submit('新建权限',['class' => 'btn btn-success form-control']) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+
+
+>RoleController.php
+
+
+		public function store(Request $request){
+
+        $role=Role::create([
+            'name'=>$request->name,
+            'display_name'=>$request->display_name,
+            'description'=>$request->description,
+        ]);
+        if($request->perm){
+            $role->attachPermissions($request->perm);
+        }
+        return redirect()->back();
+
+>PermissionController.php
+
+	public function store(Request $request){
+
+        $perm=Permission::create([
+            'name'=>$request->name,
+            'display_name'=>$request->display_name,
+            'description'=>$request->description,
+        ]);
+
+        return redirect()->back();
+    }
+
+		
+
 	
